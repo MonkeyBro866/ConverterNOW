@@ -5,6 +5,11 @@
 .pub/
 
 build/
+.android/
+.android copy/
+android/
+.ios/
+ios/
 
 .flutter-plugins
 *.jks
@@ -21,3 +26,6 @@ debug.log
 packages/translations/lib/app_localizations*.dart
 pubspec_overrides.yaml
 assets/*/*.svg.vec
+
+# FVM Version Cache
+.fvm/

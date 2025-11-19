@@ -1,4 +1,4 @@
-import 'dart:io';
+// import 'dart:io';
 import 'package:converterpro/models/currencies.dart';
 import 'package:converterpro/models/settings.dart';
 import 'package:converterpro/utils/palette.dart';
@@ -10,7 +10,7 @@ import 'package:converterpro/utils/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -162,8 +162,7 @@ class SettingsPage extends ConsumerWidget {
                   SwitchListTile(
                     secondary: Icon(Icons.public_off, color: iconColor),
                     title: Text(l10n.revokeInternetAccess),
-                    value: ref.watch(revokeInternetProvider).value ??
-                        false,
+                    value: ref.watch(revokeInternetProvider).value ?? false,
                     onChanged: (bool val) {
                       if (val) {
                         showDialog(
@@ -202,9 +201,7 @@ class SettingsPage extends ConsumerWidget {
                           },
                         );
                       } else {
-                        ref
-                            .read(revokeInternetProvider.notifier)
-                            .set(val);
+                        ref.read(revokeInternetProvider.notifier).set(val);
                         ref
                             .read(CurrenciesNotifier.provider.notifier)
                             .forceCurrenciesDownload();
@@ -294,184 +291,184 @@ class SettingsPage extends ConsumerWidget {
                     borderRadius: borderRadius,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 16, top: 16),
-                  child: Text(
-                    l10n.findOutMore,
-                    style: titlesStyle,
-                  ),
-                ),
-                ListTile(
-                  leading: Icon(Icons.computer, color: iconColor),
-                  title: Text(l10n.otherPlatforms),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: borderRadius,
-                  ),
-                  onTap: () => showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return SimpleDialog(
-                        title: Text(l10n.otherPlatforms),
-                        children: [
-                          if (!kIsWeb)
-                            ListTile(
-                              title: const Text('Web'),
-                              leading: const Icon(Icons.public_outlined),
-                              onTap: () => launchURL(
-                                Uri(
-                                  scheme: 'https',
-                                  host: 'converter-now.web.app',
-                                ),
-                                mode: LaunchMode.externalApplication,
-                              ),
-                            ),
-                          if (kIsWeb || Platform.isWindows || Platform.isLinux)
-                            ListTile(
-                              title: const Text('Android'),
-                              leading: const Icon(Icons.android_outlined),
-                              onTap: () => launchURL(
-                                Uri(
-                                  scheme: 'https',
-                                  host: 'play.google.com',
-                                  path: '/store/apps/details',
-                                  queryParameters: {
-                                    'id': 'com.ferrarid.converterpro',
-                                  },
-                                ),
-                              ),
-                            ),
-                          if (kIsWeb || Platform.isAndroid || Platform.isLinux)
-                            ListTile(
-                              title: const Text('Windows'),
-                              leading: const Icon(Icons.laptop),
-                              onTap: () => launchURL(
-                                Uri(
-                                  scheme: 'https',
-                                  host: 'apps.microsoft.com',
-                                  path: '/detail/9p0q79hwjh72',
-                                ),
-                                mode: LaunchMode.externalApplication,
-                              ),
-                            ),
-                          ListTile(
-                            title: const Text('Linux (Flatpak)'),
-                            leading: const Icon(Icons.desktop_windows_outlined),
-                            onTap: () => launchURL(
-                              Uri(
-                                scheme: 'https',
-                                host: 'flathub.org',
-                                path:
-                                    '/apps/details/io.github.ferraridamiano.ConverterNOW',
-                              ),
-                              mode: LaunchMode.externalApplication,
-                            ),
-                          ),
-                          ListTile(
-                            title: const Text('Linux (AppImage)'),
-                            leading: const Icon(Icons.desktop_windows_outlined),
-                            onTap: () => launchURL(
-                              Uri(
-                                scheme: 'https',
-                                host: 'github.com',
-                                path:
-                                    '/ferraridamiano/ConverterNOW/releases/latest',
-                              ),
-                              mode: LaunchMode.externalApplication,
-                            ),
-                          ),
-                          ListTile(
-                            title: Text(l10n.sourceCode),
-                            leading: const Icon(Icons.code),
-                            onTap: () => launchURL(
-                              Uri(
-                                scheme: 'https',
-                                host: 'github.com',
-                                path: '/ferraridamiano/ConverterNOW',
-                              ),
-                              mode: LaunchMode.externalApplication,
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-                ListTile(
-                  leading: Icon(Icons.translate, color: iconColor),
-                  title: Text(l10n.contributeTranslating),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: borderRadius,
-                  ),
-                  onTap: () {
-                    launchURL(
-                      Uri(
-                        scheme: 'https',
-                        host: 'github.com',
-                        path: '/ferraridamiano/ConverterNOW/issues/2',
-                      ),
-                      mode: LaunchMode.externalApplication,
-                    );
-                  },
-                ),
-                if (!const bool.fromEnvironment(
-                  'IS_PLAYSTORE',
-                  defaultValue: false,
-                ))
-                  ListTile(
-                    leading: Icon(Icons.coffee_outlined, color: iconColor),
-                    title: Text(l10n.buyMeACoffee),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: borderRadius,
-                    ),
-                    onTap: () {
-                      showDialog<void>(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text(l10n.buyMeACoffee),
-                            content: SizedBox(
-                              width: 500,
-                              child: Text(
-                                l10n.donationDialog,
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                            ),
-                            actions: <Widget>[
-                              TextButton(
-                                child: Text(
-                                  l10n.buyMeACoffee,
-                                  style: TextStyle(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.secondary,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  launchURL(
-                                    Uri(
-                                      scheme: 'https',
-                                      host: 'paypal.me',
-                                      path: '/DemApps',
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ListTile(
-                  leading: Icon(Icons.info_outline, color: iconColor),
-                  title: Text(l10n.about),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: borderRadius,
-                  ),
-                  onTap: () => context.goNamed('about'),
-                ),
+                // Padding(
+                //   padding: const EdgeInsetsDirectional.only(start: 16, top: 16),
+                //   child: Text(
+                //     l10n.findOutMore,
+                //     style: titlesStyle,
+                //   ),
+                // ),
+                // ListTile(
+                //   leading: Icon(Icons.computer, color: iconColor),
+                //   title: Text(l10n.otherPlatforms),
+                //   shape: const RoundedRectangleBorder(
+                //     borderRadius: borderRadius,
+                //   ),
+                //   onTap: () => showDialog<String>(
+                //     context: context,
+                //     builder: (BuildContext context) {
+                //       return SimpleDialog(
+                //         title: Text(l10n.otherPlatforms),
+                //         children: [
+                //           if (!kIsWeb)
+                //             ListTile(
+                //               title: const Text('Web'),
+                //               leading: const Icon(Icons.public_outlined),
+                //               onTap: () => launchURL(
+                //                 Uri(
+                //                   scheme: 'https',
+                //                   host: 'converter-now.web.app',
+                //                 ),
+                //                 mode: LaunchMode.externalApplication,
+                //               ),
+                //             ),
+                //           if (kIsWeb || Platform.isWindows || Platform.isLinux)
+                //             ListTile(
+                //               title: const Text('Android'),
+                //               leading: const Icon(Icons.android_outlined),
+                //               onTap: () => launchURL(
+                //                 Uri(
+                //                   scheme: 'https',
+                //                   host: 'play.google.com',
+                //                   path: '/store/apps/details',
+                //                   queryParameters: {
+                //                     'id': 'com.ferrarid.converterpro',
+                //                   },
+                //                 ),
+                //               ),
+                //             ),
+                //           if (kIsWeb || Platform.isAndroid || Platform.isLinux)
+                //             ListTile(
+                //               title: const Text('Windows'),
+                //               leading: const Icon(Icons.laptop),
+                //               onTap: () => launchURL(
+                //                 Uri(
+                //                   scheme: 'https',
+                //                   host: 'apps.microsoft.com',
+                //                   path: '/detail/9p0q79hwjh72',
+                //                 ),
+                //                 mode: LaunchMode.externalApplication,
+                //               ),
+                //             ),
+                //           ListTile(
+                //             title: const Text('Linux (Flatpak)'),
+                //             leading: const Icon(Icons.desktop_windows_outlined),
+                //             onTap: () => launchURL(
+                //               Uri(
+                //                 scheme: 'https',
+                //                 host: 'flathub.org',
+                //                 path:
+                //                     '/apps/details/io.github.ferraridamiano.ConverterNOW',
+                //               ),
+                //               mode: LaunchMode.externalApplication,
+                //             ),
+                //           ),
+                //           ListTile(
+                //             title: const Text('Linux (AppImage)'),
+                //             leading: const Icon(Icons.desktop_windows_outlined),
+                //             onTap: () => launchURL(
+                //               Uri(
+                //                 scheme: 'https',
+                //                 host: 'github.com',
+                //                 path:
+                //                     '/ferraridamiano/ConverterNOW/releases/latest',
+                //               ),
+                //               mode: LaunchMode.externalApplication,
+                //             ),
+                //           ),
+                //           ListTile(
+                //             title: Text(l10n.sourceCode),
+                //             leading: const Icon(Icons.code),
+                //             onTap: () => launchURL(
+                //               Uri(
+                //                 scheme: 'https',
+                //                 host: 'github.com',
+                //                 path: '/ferraridamiano/ConverterNOW',
+                //               ),
+                //               mode: LaunchMode.externalApplication,
+                //             ),
+                //           ),
+                //         ],
+                //       );
+                //     },
+                //   ),
+                // ),
+                // ListTile(
+                //   leading: Icon(Icons.translate, color: iconColor),
+                //   title: Text(l10n.contributeTranslating),
+                //   shape: const RoundedRectangleBorder(
+                //     borderRadius: borderRadius,
+                //   ),
+                //   onTap: () {
+                //     launchURL(
+                //       Uri(
+                //         scheme: 'https',
+                //         host: 'github.com',
+                //         path: '/ferraridamiano/ConverterNOW/issues/2',
+                //       ),
+                //       mode: LaunchMode.externalApplication,
+                //     );
+                //   },
+                // ),
+                // if (!const bool.fromEnvironment(
+                //   'IS_PLAYSTORE',
+                //   defaultValue: false,
+                // ))
+                //   ListTile(
+                //     leading: Icon(Icons.coffee_outlined, color: iconColor),
+                //     title: Text(l10n.buyMeACoffee),
+                //     shape: const RoundedRectangleBorder(
+                //       borderRadius: borderRadius,
+                //     ),
+                //     onTap: () {
+                //       showDialog<void>(
+                //         context: context,
+                //         barrierDismissible: true,
+                //         builder: (BuildContext context) {
+                //           return AlertDialog(
+                //             title: Text(l10n.buyMeACoffee),
+                //             content: SizedBox(
+                //               width: 500,
+                //               child: Text(
+                //                 l10n.donationDialog,
+                //                 style: Theme.of(context).textTheme.bodyLarge,
+                //               ),
+                //             ),
+                //             actions: <Widget>[
+                //               TextButton(
+                //                 child: Text(
+                //                   l10n.buyMeACoffee,
+                //                   style: TextStyle(
+                //                     color: Theme.of(
+                //                       context,
+                //                     ).colorScheme.secondary,
+                //                   ),
+                //                 ),
+                //                 onPressed: () {
+                //                   Navigator.of(context).pop();
+                //                   launchURL(
+                //                     Uri(
+                //                       scheme: 'https',
+                //                       host: 'paypal.me',
+                //                       path: '/DemApps',
+                //                     ),
+                //                   );
+                //                 },
+                //               ),
+                //             ],
+                //           );
+                //         },
+                //       );
+                //     },
+                //   ),
+                // ListTile(
+                //   leading: Icon(Icons.info_outline, color: iconColor),
+                //   title: Text(l10n.about),
+                //   shape: const RoundedRectangleBorder(
+                //     borderRadius: borderRadius,
+                //   ),
+                //   onTap: () => context.goNamed('about'),
+                // ),
                 // Space for the navigation bar (android)
                 SizedBox(height: MediaQuery.paddingOf(context).bottom),
               ].map(ConstrainedContainer.new).toList(),

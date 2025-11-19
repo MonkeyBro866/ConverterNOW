@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:translations/app_localizations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:umeng_ad_flutter/umeng_ad_flutter.dart';
 
 void main() async {
   LicenseRegistry.addLicense(() async* {
@@ -18,6 +19,21 @@ void main() async {
   });
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  // 初始化友盟广告SDK
+  try {
+    debugPrint('友盟广告: 开始初始化');
+    await UmengAdFlutter.initialize(
+      appKey: '691d7cec9a7f376488dea675', // 替换为您的友盟AppKey
+      channel: 'App Store', // 渠道标识
+      isDebug: true, // 调试模式
+    );
+    debugPrint('友盟广告: 初始化成功');
+  } catch (error, stackTrace) {
+    debugPrint('友盟广告: 初始化失败 -> $error');
+    debugPrint('$stackTrace');
+  }
+
   runApp(const ProviderScope(child: MyApp()));
 }
 

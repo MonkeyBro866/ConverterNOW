@@ -121,8 +121,8 @@ final routerProvider = Provider<GoRouter>(
       ),
     ],
     redirect: (context, state) {
-      // Bypass splashscreen if variables are already loaded
-      if (state.uri.toString() == '/') {
+      // 仅在首次加载时绕过启动页，避免重复显示
+      if (state.uri.toString() == '/' && state.fullPath == '/') {
         if (ref.read(isEverythingLoadedProvider)) {
           final conversionsOrderDrawer =
               ref.read(PropertiesOrderNotifier.provider).value!;
