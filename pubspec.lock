@@ -236,10 +236,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_svg
-      sha256: "055de8921be7b8e8b98a233c7a5ef84b3a6fcc32f46f1ebf5b9bb3576d108355"
+      sha256: "87fbd7c534435b6c5d9d98b01e1fd527812b82e68ddd8bd35fc45ed0fa8f0a95"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.2.2"
+    version: "2.2.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -608,10 +608,10 @@ packages:
     dependency: transitive
     description:
       name: quick_actions_android
-      sha256: "1c28eb0809a7f72b3aa9666a13a28189063d96a7cc499f68783c32a5f261ef9e"
+      sha256: "23f04632ada7fc16665d84ba54a0c792c09727e7fda6c989c6e6ba1853aa15dc"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.26"
+    version: "1.0.27"
   quick_actions_ios:
     dependency: transitive
     description:
@@ -656,10 +656,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "07d552dbe8e71ed720e5205e760438ff4ecfb76ec3b32ea664350e2ca4b0c43b"
+      sha256: "83af5c682796c0f7719c2bbf74792d113e40ae97981b8f266fa84574573556bc"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.4.16"
+    version: "2.4.18"
   shared_preferences_foundation:
     dependency: transitive
     description:
@@ -868,10 +868,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "1a109ee074e2a3b17ec3f2785248cb3e93c1e4abab878f637bc33267089f05a3"
+      sha256: "767344bf3063897b5cf0db830e94f904528e6dd50a6dfaf839f0abf509009611"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "6.3.26"
+    version: "6.3.28"
   url_launcher_ios:
     dependency: transitive
     description:
@@ -1045,10 +1045,10 @@ packages:
     dependency: transitive
     description:
       name: yaml_edit
-      sha256: fb38626579fb345ad00e674e2af3a5c9b0cc4b9bfb8fd7f7ff322c7c9e62aef5
+      sha256: ec709065bb2c911b336853b67f3732dd13e0336bd065cc2f1061d7610ddf45e3
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.2.2"
+    version: "2.2.3"
 sdks:
   dart: ">=3.9.0 <4.0.0"
   flutter: ">=3.35.1"

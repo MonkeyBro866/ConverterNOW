@@ -112,57 +112,64 @@ class ConversionPage extends ConsumerWidget {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraint) {
       final int numCols = responsiveNumCols(constraint.maxWidth);
-      return CustomScrollView(slivers: <Widget>[
-        SliverAppBar.large(
-          title: Text(propertyUiMap[property]!.name),
-        ),
-        if (subtitleWidget != null)
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [subtitleWidget],
-              ),
-            ),
+      return GestureDetector(
+        onTap: () {
+          // 点击空白处时，收起键盘并取消所有输入框的焦点
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: CustomScrollView(slivers: <Widget>[
+          SliverAppBar.large(
+            title: Text(propertyUiMap[property]!.name),
           ),
-        SliverPadding(
-          padding: const EdgeInsets.only(top: 10),
-          sliver: SliverGrid.count(
-            crossAxisCount: numCols,
-            childAspectRatio: responsiveChildAspectRatio(
-              constraint.maxWidth,
-              numCols,
-            ),
-            children: unhiddenGridTiles,
-          ),
-        ),
-        if (hiddenUnitData.isNotEmpty)
-          SliverToBoxAdapter(
-            child: ExpansionTile(
-              leading: const Icon(Icons.visibility_off_outlined),
-              title: Text(
-                l10n.hiddenUnits,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              children: [
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: numCols,
-                  childAspectRatio:
-                      responsiveChildAspectRatio(constraint.maxWidth, numCols),
-                  children: hiddenGridTiles,
+          if (subtitleWidget != null)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [subtitleWidget],
                 ),
-              ],
+              ),
+            ),
+          SliverPadding(
+            padding: const EdgeInsets.only(top: 10),
+            sliver: SliverGrid.count(
+              crossAxisCount: numCols,
+              childAspectRatio: responsiveChildAspectRatio(
+                constraint.maxWidth,
+                numCols,
+              ),
+              children: unhiddenGridTiles,
             ),
           ),
-        if (isDrawerFixed(MediaQuery.sizeOf(context).width))
-          // Space for FAB + navigation bar (android)
-          SliverToBoxAdapter(
-            child: SizedBox(height: 60 + MediaQuery.paddingOf(context).bottom),
-          ),
-      ]);
+          if (hiddenUnitData.isNotEmpty)
+            SliverToBoxAdapter(
+              child: ExpansionTile(
+                leading: const Icon(Icons.visibility_off_outlined),
+                title: Text(
+                  l10n.hiddenUnits,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                children: [
+                  GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: numCols,
+                    childAspectRatio: responsiveChildAspectRatio(
+                        constraint.maxWidth, numCols),
+                    children: hiddenGridTiles,
+                  ),
+                ],
+              ),
+            ),
+          if (isDrawerFixed(MediaQuery.sizeOf(context).width))
+            // Space for FAB + navigation bar (android)
+            SliverToBoxAdapter(
+              child:
+                  SizedBox(height: 60 + MediaQuery.paddingOf(context).bottom),
+            ),
+        ]),
+      );
     });
   }
 }
